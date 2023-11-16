@@ -1,0 +1,78 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "next"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "app/**/*.ts",
+        "app/**/*.tsx"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "unused-imports"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "unused-imports/no-unused-imports": "warn",
+        "no-console": "warn",
+        "@typescript-eslint/no-explicit-any": [
+          "warn",
+          {
+            "ignoreRestArgs": true
+          }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@chakra-ui/react",
+                  "next/link"
+                ],
+                "importNames": [
+                  "Link"
+                ],
+                "message": "Import Link from '@chakra-ui/react' and 'next/lint' is not allowed. use '@chakra-ui/next-js'"
+              },
+              {
+                "group": [
+                  "@chakra-ui/react"
+                ],
+                "importNames": [
+                  "IconButton",
+                  "IconButtonProps",
+                  "Badge",
+                  "BadgeProps",
+                  "Card",
+                  "CardProps"
+                ],
+                "message": "Import {IconButton, Badge, Card} from '@chakra-ui/react' is not allowed. use {IconButton, Badge, Card} from '@/app/components/Shared'"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
